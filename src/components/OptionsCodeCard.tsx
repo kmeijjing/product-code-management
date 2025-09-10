@@ -6,6 +6,7 @@ import { CodePattern } from '@/types/codePattern';
 import SectionHeaderCard from '@/components/SectionHeaderCard';
 import DraggableCodeItemList from '@/components/DraggableCodeItemList';
 import DraggableCodeItem from '@/components/DraggableCodeItem';
+import { IoAlertCircle } from 'react-icons/io5';
 
 const OptionsCodeCard = () => {
 	const { activeOptionCode, inactiveOptionCode, update } = useOptionCodeStore();
@@ -54,14 +55,25 @@ const OptionsCodeCard = () => {
 						ref={activeList}
 						active
 					>
-						{activeItems.map((code) => (
-							<DraggableCodeItem
-								key={code.id}
-								active
-								fieldName={code.field}
-								codePattern={code}
-							/>
-						))}
+						<>
+							{!activeItems.length ? (
+								<div className='flex h-full w-full items-center justify-center gap-x-[4px] text-[12px]'>
+									<IoAlertCircle className='text-gray-400' />
+									<span className='text-gray-500'>
+										최소 1개의 항목은 필수로 사용해야합니다.
+									</span>
+								</div>
+							) : (
+								activeItems.map((code) => (
+									<DraggableCodeItem
+										key={code.id}
+										active
+										fieldName={code.field}
+										codePattern={code}
+									/>
+								))
+							)}
+						</>
 					</DraggableCodeItemList>
 					<div className='h-[2px] w-full bg-gray-300'></div>
 					<strong className='mx-[20px] mt-[16px] block border-b border-gray-200 pb-[12px] text-[12px] text-gray-500'>
