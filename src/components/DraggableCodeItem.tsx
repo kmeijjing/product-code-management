@@ -3,7 +3,9 @@ import { CODE_FIELD_LABELS } from '@/constants/codePatterns';
 import type { CodeField, CodePattern } from '@/types/codePattern';
 import { FaBars } from 'react-icons/fa6';
 import { IoAlertCircle } from 'react-icons/io5';
-import { FaAsterisk } from 'react-icons/fa6';
+import { FaAsterisk, FaAngleRight } from 'react-icons/fa6';
+import { useModal } from '@/contexts/ModalProvider';
+import CodePatternDetail from '@/components/CodePatternDetail';
 
 export const DraggableCodeItem = ({
 	fieldName,
@@ -14,6 +16,22 @@ export const DraggableCodeItem = ({
 	active: boolean;
 	codePattern: CodePattern;
 }) => {
+	const { createModal } = useModal();
+	const onClickItem = () => {
+		createModal({
+			content: (props) => (
+				<CodePatternDetail
+					codePattern={codePattern}
+					onCancel={props.onCancel!}
+					{...props}
+				/>
+			),
+			onOk: async () => {
+				// api 연결한다면 데이터 갱신
+			},
+		});
+	};
+
 	return (
 		<li
 			id={`${codePattern.fieldGroup}_${codePattern.field}`}
@@ -33,13 +51,21 @@ export const DraggableCodeItem = ({
 			)}
 		>
 			<FaBars className='text-[13px] text-gray-400' />
-			<strong className='ml-[16px] text-[14px]'>
-				{CODE_FIELD_LABELS[fieldName]}
-			</strong>
-			{codePattern.fieldGroup === 'product' &&
-				codePattern.field === 'sequence' && (
-					<FaAsterisk className='ml-[4px] text-[12px] text-blue-400' />
-				)}
+			<button
+				type='button'
+				className='flex cursor-pointer	flex-nowrap items-center gap-x-[4px]'
+				title='코드 패턴 설정'
+				onClick={() => onClickItem()}
+			>
+				<strong className='ml-[16px] text-[14px]'>
+					{CODE_FIELD_LABELS[fieldName]}
+				</strong>
+				{codePattern.fieldGroup === 'product' &&
+					codePattern.field === 'sequence' && (
+						<FaAsterisk className='ml-[4px] text-[12px] text-blue-400' />
+					)}
+				<FaAngleRight className='ml-[4px] text-[12px] text-gray-400' />
+			</button>
 
 			<div className='ml-auto flex flex-nowrap items-center	gap-x-[12px] text-[12px] text-gray-500'>
 				{!codePattern.sampleCode && (
