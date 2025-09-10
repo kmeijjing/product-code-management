@@ -2,20 +2,29 @@ import { create } from 'zustand';
 import type { CodePattern } from '@/types/codePattern';
 
 export interface ProductCodeState {
+	activeProductCode: CodePattern[];
+	inactiveProductCode: CodePattern[];
 	productCode: CodePattern[];
-	updateCode: (key: keyof ProductCodeState, value: any) => void;
-	resetCode: () => void;
+	update: <K extends keyof Omit<ProductCodeState, 'update' | 'reset'>>(
+		key: K,
+		value: ProductCodeState[K]
+	) => void;
+	reset: () => void;
 }
 
-const INIT_PRODUCT_CODE_STATE: ProductCodeState['productCode'] = [];
+const INIT_STATE: Omit<ProductCodeState, 'update' | 'reset'> = {
+	activeProductCode: [],
+	inactiveProductCode: [],
+	productCode: [],
+};
 
 export const useProductCodeStore = create<ProductCodeState>((set) => ({
-	productCode: INIT_PRODUCT_CODE_STATE,
+	...INIT_STATE,
 
-	updateCode: (key, value) =>
+	update: (key, value) =>
 		set((state) => ({
 			...state,
 			[key]: value,
 		})),
-	resetCode: () => set(() => ({ productCode: INIT_PRODUCT_CODE_STATE })),
+	reset: () => set(() => INIT_STATE),
 }));

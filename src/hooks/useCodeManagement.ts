@@ -1,28 +1,19 @@
 import { CODE_PATTERNS } from '@/constants/codePatterns';
-import {
-	CATEGORY_MOCK_UP_DATA,
-	YEAR_MOCK_UP_DATA,
-	SEASON_MOCK_UP_DATA,
-	BRAND_MOCK_UP_DATA,
-	SIZE_MOCK_UP_DATA,
-	COLOR_MOCK_UP_DATA,
-	CODE_DATA,
-} from '@/constants/codes';
+import { CODE_DATA } from '@/constants/codes';
 import { useOptionCodeStore } from '@/stores/useOptionCodeStore';
 import { useProductCodeStore } from '@/stores/useProductCodeStore';
 import { useSampleCodeStore } from '@/stores/useSampleCodeStore';
-import { Code } from '@/types/code';
 import { groupByKey, sortByKey } from '@/utils';
 
 export const useCodeManagement = () => {
 	const { updateCode } = useSampleCodeStore();
-	const { productCode } = useProductCodeStore();
-	const { optionCode } = useOptionCodeStore();
+	const { update: updateProductCode } = useProductCodeStore();
+	const { update: updateOptionCode } = useOptionCodeStore();
 
 	const fetchCodePatterns = () => {
-		const patterns = CODE_PATTERNS;
+		const codePattern = CODE_PATTERNS;
 
-		const activePatterns = patterns
+		const activePatterns = codePattern
 			.filter((pattern) => pattern.sort !== -1)
 			.map((pattern) => {
 				if (pattern.field === 'sequence') {
@@ -47,12 +38,27 @@ export const useCodeManagement = () => {
 			product: sorted['product'] || [],
 			option: sorted['option'] || [],
 		});
-	};
 
-	const fetchCodeControlList = () => {};
+		const activeProductCode = codePattern.filter(
+			(pattern) => pattern.fieldGroup === 'product' && pattern.sort !== -1
+		);
+		const inactiveProductCode = codePattern.filter(
+			(pattern) => pattern.fieldGroup === 'product' && pattern.sort === -1
+		);
+		const activeOptionCode = codePattern.filter(
+			(pattern) => pattern.fieldGroup === 'option' && pattern.sort !== -1
+		);
+		const inactiveOptionCode = codePattern.filter(
+			(pattern) => pattern.fieldGroup === 'option' && pattern.sort === -1
+		);
+
+		updateProductCode('activeProductCode', activeProductCode);
+		updateProductCode('inactiveProductCode', inactiveProductCode);
+		updateOptionCode('activeOptionCode', activeOptionCode);
+		updateOptionCode('inactiveOptionCode', inactiveOptionCode);
+	};
 
 	return {
 		fetchCodePatterns,
-		fetchCodeControlList,
 	};
 };

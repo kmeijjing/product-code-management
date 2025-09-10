@@ -14,12 +14,12 @@ export default function Home() {
 	}, []);
 
 	return (
-		<div className='flex flex-col gap-y-[16px] p-[16px]'>
+		<div className='mx-auto flex w-[848px] flex-col gap-y-[12px] p-[16px]'>
 			<CodePreviewCard />
 
-			<div className='flex flex-nowrap gap-x-[16px]'>
-				<OptionsCodeCard />
+			<div className='flex flex-nowrap gap-x-[12px]'>
 				<ProductCodeCard />
+				<OptionsCodeCard />
 			</div>
 		</div>
 	);

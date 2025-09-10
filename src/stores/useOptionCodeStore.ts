@@ -1,21 +1,30 @@
 import { create } from 'zustand';
 import type { CodePattern } from '@/types/codePattern';
 
-export interface OptionsCodeState {
+export interface OptionCodeState {
+	activeOptionCode: CodePattern[];
+	inactiveOptionCode: CodePattern[];
 	optionCode: CodePattern[];
-	updateCode: (key: keyof OptionsCodeState, value: any) => void;
-	resetCode: () => void;
+	update: <K extends keyof Omit<OptionCodeState, 'update' | 'reset'>>(
+		key: K,
+		value: OptionCodeState[K]
+	) => void;
+	reset: () => void;
 }
 
-const INIT_OPTION_CODE_STATE: OptionsCodeState['optionCode'] = [];
+const INIT_STATE: Omit<OptionCodeState, 'update' | 'reset'> = {
+	activeOptionCode: [],
+	inactiveOptionCode: [],
+	optionCode: [],
+};
 
-export const useOptionCodeStore = create<OptionsCodeState>((set) => ({
-	optionCode: INIT_OPTION_CODE_STATE,
+export const useOptionCodeStore = create<OptionCodeState>((set) => ({
+	...INIT_STATE,
 
-	updateCode: (key, value) =>
+	update: (key, value) =>
 		set((state) => ({
 			...state,
 			[key]: value,
 		})),
-	resetCode: () => set(() => ({ optionCode: INIT_OPTION_CODE_STATE })),
+	reset: () => set(() => INIT_STATE),
 }));
