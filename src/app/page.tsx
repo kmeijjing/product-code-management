@@ -7,7 +7,7 @@ import ProductCodeCard from '@/components/ProductCodeCard';
 import { useCodeManagement } from '@/hooks/useCodeManagement';
 
 export default function Home() {
-	const { fetchCodePatterns } = useCodeManagement();
+	const { sampleCodePattern, fetchCodePatterns } = useCodeManagement();
 
 	useEffect(() => {
 		fetchCodePatterns();
@@ -15,7 +15,7 @@ export default function Home() {
 
 	return (
 		<div className='mx-auto flex w-[848px] flex-col gap-y-[12px] p-[16px]'>
-			<CodePreviewCard />
+			<CodePreviewCard sampleCode={sampleCodePattern} />
 
 			<div className='flex flex-nowrap gap-x-[12px]'>
 				<ProductCodeCard />

@@ -3,9 +3,9 @@ import { useDragAndDrop } from '@formkit/drag-and-drop/react';
 import { animations } from '@formkit/drag-and-drop';
 import { useProductCodeStore } from '@/stores/useProductCodeStore';
 import type { CodePattern } from '@/types/codePattern';
-import DraggableCodeItem from '@/components/DraggableCodeItem';
-import DraggableCodeItemList from '@/components/DraggableCodeItemList';
 import SectionHeaderCard from '@/components/SectionHeaderCard';
+import DraggableCodeItemList from '@/components/DraggableCodeItemList';
+import DraggableCodeItem from '@/components/DraggableCodeItem';
 
 const ProductCodeCard = () => {
 	const { activeProductCode, inactiveProductCode, update } =

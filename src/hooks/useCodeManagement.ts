@@ -1,14 +1,31 @@
+import { useMemo } from 'react';
+import { useShallow } from 'zustand/shallow';
 import { CODE_PATTERNS } from '@/constants/codePatterns';
 import { CODE_DATA } from '@/constants/codes';
 import { useOptionCodeStore } from '@/stores/useOptionCodeStore';
 import { useProductCodeStore } from '@/stores/useProductCodeStore';
-import { useSampleCodeStore } from '@/stores/useSampleCodeStore';
 import { groupByKey, sortByKey } from '@/utils';
 
 export const useCodeManagement = () => {
-	const { updateCode } = useSampleCodeStore();
-	const { update: updateProductCode } = useProductCodeStore();
-	const { update: updateOptionCode } = useOptionCodeStore();
+	const { activeProductCode, update: updateProductCode } = useProductCodeStore(
+		useShallow((state) => ({
+			activeProductCode: state.activeProductCode,
+			update: state.update,
+		}))
+	);
+	const { activeOptionCode, update: updateOptionCode } = useOptionCodeStore(
+		useShallow((state) => ({
+			activeOptionCode: state.activeOptionCode,
+			update: state.update,
+		}))
+	);
+
+	const sampleCodePattern = useMemo(() => {
+		return {
+			product: activeProductCode,
+			option: activeOptionCode,
+		};
+	}, [activeProductCode, activeOptionCode]);
 
 	const fetchCodePatterns = () => {
 		const codePattern = CODE_PATTERNS;
@@ -34,31 +51,22 @@ export const useCodeManagement = () => {
 			{} as Record<string, typeof activePatterns>
 		);
 
-		updateCode('sampleCode', {
-			product: sorted['product'] || [],
-			option: sorted['option'] || [],
-		});
-
-		const activeProductCode = codePattern.filter(
-			(pattern) => pattern.fieldGroup === 'product' && pattern.sort !== -1
-		);
 		const inactiveProductCode = codePattern.filter(
 			(pattern) => pattern.fieldGroup === 'product' && pattern.sort === -1
 		);
-		const activeOptionCode = codePattern.filter(
-			(pattern) => pattern.fieldGroup === 'option' && pattern.sort !== -1
-		);
+
 		const inactiveOptionCode = codePattern.filter(
 			(pattern) => pattern.fieldGroup === 'option' && pattern.sort === -1
 		);
 
-		updateProductCode('activeProductCode', activeProductCode);
+		updateProductCode('activeProductCode', sorted['product']);
 		updateProductCode('inactiveProductCode', inactiveProductCode);
-		updateOptionCode('activeOptionCode', activeOptionCode);
+		updateOptionCode('activeOptionCode', sorted['option']);
 		updateOptionCode('inactiveOptionCode', inactiveOptionCode);
 	};
 
 	return {
 		fetchCodePatterns,
+		sampleCodePattern,
 	};
 };

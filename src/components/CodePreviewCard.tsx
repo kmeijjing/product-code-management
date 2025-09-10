@@ -1,15 +1,12 @@
-import SectionHeaderCard from '@/components/SectionHeaderCard';
 import { CODE_FIELD_LABELS } from '@/constants/codePatterns';
-import { useSampleCodeStore } from '@/stores/useSampleCodeStore';
-import { useShallow } from 'zustand/shallow';
+import type { CodePattern } from '@/types/codePattern';
+import SectionHeaderCard from '@/components/SectionHeaderCard';
 
-const CodePreview = () => {
-	const { sampleCode } = useSampleCodeStore(
-		useShallow((state) => ({
-			sampleCode: state.sampleCode,
-		}))
-	);
-
+const CodePreview = ({
+	sampleCode,
+}: {
+	sampleCode: { product: CodePattern[]; option: CodePattern[] };
+}) => {
 	return (
 		<SectionHeaderCard
 			title='코드 미리보기'

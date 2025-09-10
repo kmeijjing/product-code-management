@@ -3,9 +3,9 @@ import { useDragAndDrop } from '@formkit/drag-and-drop/react';
 import { animations } from '@formkit/drag-and-drop';
 import { useOptionCodeStore } from '@/stores/useOptionCodeStore';
 import { CodePattern } from '@/types/codePattern';
-import DraggableCodeItem from '@/components/DraggableCodeItem';
 import SectionHeaderCard from '@/components/SectionHeaderCard';
 import DraggableCodeItemList from '@/components/DraggableCodeItemList';
+import DraggableCodeItem from '@/components/DraggableCodeItem';
 
 const OptionsCodeCard = () => {
 	const { activeOptionCode, inactiveOptionCode, update } = useOptionCodeStore();
