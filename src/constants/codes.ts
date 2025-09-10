@@ -1,6 +1,7 @@
 import { Code } from '@/types/code';
+import { CodeField } from '@/types/codePattern';
 
-export const PRODUCT_CATEGORY_MOCK_UP_DATA: Code[] = [
+export const CATEGORY_MOCK_UP_DATA: Code[] = [
 	{ id: 1, codeName: 'Tops', value: 'Tops' },
 	{ id: 2, codeName: 'Bottoms', value: 'Bottoms' },
 	{ id: 3, codeName: 'Dresses', value: 'Dresses' },
@@ -77,3 +78,12 @@ export const COLOR_MOCK_UP_DATA: Code[] = [
 	{ id: 49, codeName: 'Pink', value: 'Pink' },
 	{ id: 50, codeName: 'Beige', value: 'Beige' },
 ];
+
+export const CODE_DATA: Record<Exclude<CodeField, 'sequence'>, Code[]> = {
+	category: CATEGORY_MOCK_UP_DATA,
+	year: YEAR_MOCK_UP_DATA,
+	season: SEASON_MOCK_UP_DATA,
+	brand: BRAND_MOCK_UP_DATA,
+	size: SIZE_MOCK_UP_DATA,
+	color: COLOR_MOCK_UP_DATA,
+};

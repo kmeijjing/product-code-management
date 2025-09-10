@@ -1,5 +1,15 @@
 import { CodePattern } from '@/types/codePattern';
 
+export const CODE_FIELD_LABELS: Record<CodePattern['field'], string> = {
+	year: '연도',
+	season: '시즌',
+	brand: '브랜드',
+	category: '카테고리',
+	size: '사이즈',
+	color: '색상',
+	sequence: '일련번호',
+};
+
 export const CODE_PATTERNS: CodePattern[] = [
 	{
 		createdAt: '2023-10-01T10:00:00Z',
@@ -38,7 +48,7 @@ export const CODE_PATTERNS: CodePattern[] = [
 		fieldGroup: 'product',
 		id: 4,
 		length: 3,
-		sort: 5,
+		sort: -1,
 		updatedAt: '2023-10-01T10:00:00Z',
 	},
 	{
@@ -58,7 +68,7 @@ export const CODE_PATTERNS: CodePattern[] = [
 		fieldGroup: 'option',
 		id: 6,
 		length: 2,
-		sort: 2,
+		sort: -1,
 		updatedAt: '2023-10-01T10:00:00Z',
 	},
 	{
@@ -69,6 +79,16 @@ export const CODE_PATTERNS: CodePattern[] = [
 		id: 7,
 		length: 2,
 		sort: 1,
+		updatedAt: '2023-10-01T10:00:00Z',
+	},
+	{
+		createdAt: '2023-10-01T10:00:00Z',
+		idDefault: true,
+		field: 'sequence',
+		fieldGroup: 'option',
+		id: 8,
+		length: 4,
+		sort: 2,
 		updatedAt: '2023-10-01T10:00:00Z',
 	},
 ];

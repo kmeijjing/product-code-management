@@ -2,10 +2,11 @@ export type CodeField =
 	| 'year'
 	| 'season'
 	| 'brand'
+	| 'category'
 	| 'size'
 	| 'color'
-	| 'category'
 	| 'sequence';
+
 export type CodeGroup = 'product' | 'option';
 
 export interface CodePattern {
@@ -17,4 +18,5 @@ export interface CodePattern {
 	length: number;
 	sort: number;
 	updatedAt: string;
+	sampleCode?: string;
 }
