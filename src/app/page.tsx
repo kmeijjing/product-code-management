@@ -15,7 +15,7 @@ export default function Home() {
 	}, []);
 
 	return (
-		<div className='mx-auto flex w-[848px] flex-col gap-y-[12px] p-[16px]'>
+		<div className='mx-auto flex w-[848px] flex-col gap-y-[12px] p-[20px]'>
 			<CodePreviewCard
 				sampleCode={sampleCodePattern}
 				activeCodeDigit={activeCodeDigit}
