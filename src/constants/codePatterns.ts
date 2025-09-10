@@ -18,7 +18,7 @@ export const CODE_PATTERNS: CodePattern[] = [
 		fieldGroup: 'product',
 		id: 1,
 		length: 4,
-		sort: 2,
+		sort: 1,
 		updatedAt: '2023-10-01T10:00:00Z',
 	},
 	{
@@ -28,7 +28,7 @@ export const CODE_PATTERNS: CodePattern[] = [
 		fieldGroup: 'product',
 		id: 2,
 		length: 2,
-		sort: 3,
+		sort: 2,
 		updatedAt: '2023-10-01T10:00:00Z',
 	},
 	{
@@ -38,7 +38,7 @@ export const CODE_PATTERNS: CodePattern[] = [
 		fieldGroup: 'product',
 		id: 3,
 		length: 3,
-		sort: 4,
+		sort: 3,
 		updatedAt: '2023-10-01T10:00:00Z',
 	},
 	{
@@ -78,7 +78,7 @@ export const CODE_PATTERNS: CodePattern[] = [
 		fieldGroup: 'product',
 		id: 7,
 		length: 2,
-		sort: 1,
+		sort: 4,
 		updatedAt: '2023-10-01T10:00:00Z',
 	},
 	{

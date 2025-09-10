@@ -50,36 +50,36 @@ const OptionsCodeCard = () => {
 		<SectionHeaderCard title='옵션 코드'>
 			<SectionHeaderCard.Body>
 				<div className='kanban-board'>
-					<DraggableCodeItemList active>
-						<ul
-							ref={activeList}
-							className='flex h-full flex-col gap-y-[8px]'
-						>
-							{activeItems.map((code) => (
-								<DraggableCodeItem
-									key={code.id}
-									active
-									fieldName={code.field}
-									codePattern={code}
-								/>
-							))}
-						</ul>
+					<DraggableCodeItemList
+						ref={activeList}
+						active
+					>
+						{activeItems.map((code) => (
+							<DraggableCodeItem
+								key={code.id}
+								active
+								fieldName={code.field}
+								codePattern={code}
+							/>
+						))}
 					</DraggableCodeItemList>
 					<div className='h-[2px] w-full bg-gray-300'></div>
-					<DraggableCodeItemList active={false}>
-						<ul
-							ref={inactiveList}
-							className='flex h-full flex-col gap-y-[8px]'
-						>
-							{inactiveItems.map((code) => (
-								<DraggableCodeItem
-									key={code.id}
-									active={false}
-									fieldName={code.field}
-									codePattern={code}
-								/>
-							))}
-						</ul>
+					<strong className='mx-[20px] mt-[16px] block border-b border-gray-200 pb-[12px] text-[12px] text-gray-500'>
+						미사용 항목
+					</strong>
+
+					<DraggableCodeItemList
+						ref={inactiveList}
+						active={false}
+					>
+						{inactiveItems.map((code) => (
+							<DraggableCodeItem
+								key={code.id}
+								active={false}
+								fieldName={code.field}
+								codePattern={code}
+							/>
+						))}
 					</DraggableCodeItemList>
 				</div>
 			</SectionHeaderCard.Body>

@@ -17,6 +17,12 @@ const ProductCodeCard = () => {
 	>([], {
 		group: 'product',
 		plugins: [animations()],
+		draggableValue: (value) => {
+			if (value.field === 'sequence' && value.fieldGroup === 'product') {
+				return false;
+			}
+			return true;
+		},
 	});
 
 	const [inactiveList, inactiveItems, setInactive] = useDragAndDrop<
@@ -51,36 +57,35 @@ const ProductCodeCard = () => {
 		<SectionHeaderCard title='상품 코드'>
 			<SectionHeaderCard.Body>
 				<div className='kanban-board'>
-					<DraggableCodeItemList active>
-						<ul
-							ref={activeList}
-							className='flex h-full flex-col gap-y-[8px]'
-						>
-							{activeItems.map((code) => (
-								<DraggableCodeItem
-									key={code.id}
-									fieldName={code.field}
-									codePattern={code}
-									active
-								/>
-							))}
-						</ul>
+					<DraggableCodeItemList
+						ref={activeList}
+						active
+					>
+						{activeItems.map((code) => (
+							<DraggableCodeItem
+								key={code.id}
+								fieldName={code.field}
+								codePattern={code}
+								active
+							/>
+						))}
 					</DraggableCodeItemList>
 					<div className='h-[2px] w-full bg-gray-300'></div>
-					<DraggableCodeItemList active={false}>
-						<ul
-							ref={inactiveList}
-							className='flex h-full flex-col gap-y-[8px]'
-						>
-							{inactiveItems.map((code) => (
-								<DraggableCodeItem
-									key={code.id}
-									fieldName={code.field}
-									codePattern={code}
-									active={false}
-								/>
-							))}
-						</ul>
+					<strong className='mx-[20px] mt-[16px] block border-b border-gray-200 pb-[12px] text-[12px] text-gray-500'>
+						미사용 항목
+					</strong>
+					<DraggableCodeItemList
+						ref={inactiveList}
+						active={false}
+					>
+						{inactiveItems.map((code) => (
+							<DraggableCodeItem
+								key={code.id}
+								fieldName={code.field}
+								codePattern={code}
+								active={false}
+							/>
+						))}
 					</DraggableCodeItemList>
 				</div>
 			</SectionHeaderCard.Body>

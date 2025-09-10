@@ -1,44 +1,40 @@
 import { useMemo } from 'react';
-import { useShallow } from 'zustand/shallow';
+import { CodePattern } from '@/types/codePattern';
 import { CODE_PATTERNS } from '@/constants/codePatterns';
 import { CODE_DATA } from '@/constants/codes';
 import { useOptionCodeStore } from '@/stores/useOptionCodeStore';
 import { useProductCodeStore } from '@/stores/useProductCodeStore';
 import { groupByKey, sortByKey } from '@/utils';
 
+const withSampleCode = (
+	code: CodePattern
+): CodePattern & { sampleCode: string } => {
+	if (code.field === 'sequence') {
+		return { ...code, sampleCode: '0'.repeat(code.length) };
+	}
+
+	const sampleCode = CODE_DATA[code.field]?.filter(
+		(item) => item.codeName.length === code.length
+	);
+	return {
+		...code,
+		sampleCode: sampleCode?.[0]?.value || '',
+	};
+};
+
 export const useCodeManagement = () => {
-	const { activeProductCode, update: updateProductCode } = useProductCodeStore(
-		useShallow((state) => ({
-			activeProductCode: state.activeProductCode,
-			update: state.update,
-		}))
+	const activeProductCode = useProductCodeStore(
+		(state) => state.activeProductCode
 	);
-	const { activeOptionCode, update: updateOptionCode } = useOptionCodeStore(
-		useShallow((state) => ({
-			activeOptionCode: state.activeOptionCode,
-			update: state.update,
-		}))
-	);
+	const updateProductCode = useProductCodeStore((state) => state.update);
+
+	const activeOptionCode = useOptionCodeStore((state) => state.activeOptionCode);
+	const updateOptionCode = useOptionCodeStore((state) => state.update);
 
 	const sampleCodePattern = useMemo(() => {
-		const productCode = activeProductCode.map((code) => {
-			if (code.field === 'sequence') {
-				return { ...code, sampleCode: '0'.repeat(code.length) };
-			}
-			const sampleCode = CODE_DATA[code.field]?.[0]?.value || '';
-			return { ...code, sampleCode: sampleCode || '' };
-		});
-
-		const optionCode = activeOptionCode.map((code) => {
-			if (code.field === 'sequence') {
-				return { ...code, sampleCode: '0'.repeat(code.length) };
-			}
-			const sampleCode = CODE_DATA[code.field]?.[0]?.value || '';
-			return { ...code, sampleCode: sampleCode || '' };
-		});
 		return {
-			product: productCode,
-			option: optionCode,
+			product: activeProductCode.map(withSampleCode),
+			option: activeOptionCode.map(withSampleCode),
 		};
 	}, [activeProductCode, activeOptionCode]);
 
@@ -53,14 +49,7 @@ export const useCodeManagement = () => {
 
 		const activePatterns = codePattern
 			.filter((pattern) => pattern.sort !== -1)
-			.map((pattern) => {
-				if (pattern.field === 'sequence') {
-					return { ...pattern, sampleCode: '0'.repeat(pattern.length) };
-				}
-
-				const sampleCode = CODE_DATA[pattern.field]?.[0]?.value || '';
-				return { ...pattern, sampleCode: sampleCode };
-			});
+			.map(withSampleCode);
 
 		const grouped = groupByKey(activePatterns, 'fieldGroup');
 
