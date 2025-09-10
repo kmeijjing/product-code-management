@@ -5,7 +5,7 @@ import { FaBars } from 'react-icons/fa6';
 import { IoAlertCircle } from 'react-icons/io5';
 import { FaAsterisk, FaAngleRight } from 'react-icons/fa6';
 import { useModal } from '@/contexts/ModalProvider';
-import CodePatternDetail from '@/components/CodePatternDetail';
+import CodePatternDetailModal from '@/components/CodePatternDetailModal';
 
 export const DraggableCodeItem = ({
 	fieldName,
@@ -20,7 +20,7 @@ export const DraggableCodeItem = ({
 	const onClickItem = () => {
 		createModal({
 			content: (props) => (
-				<CodePatternDetail
+				<CodePatternDetailModal
 					codePattern={codePattern}
 					onCancel={props.onCancel!}
 					{...props}
