@@ -1,21 +1,18 @@
 import clsx from 'clsx';
 
 export const DraggableCodeItemList = ({
-	ref,
 	active,
 	children,
 	className = '',
 }: {
-	ref: React.Ref<HTMLUListElement>;
 	active: boolean;
 	children: React.ReactNode;
 	className?: string;
 }) => {
 	return (
-		<ul
-			ref={ref}
+		<div
 			className={clsx(
-				`flex h-[200px] flex-col gap-y-[8px] overflow-y-auto  px-[20px] py-[16px] ${className}`,
+				`h-[200px] overflow-y-auto px-[20px] py-[16px] ${className}`,
 				{
 					'bg-gray-50': active,
 					'bg-white': !active,
@@ -23,12 +20,10 @@ export const DraggableCodeItemList = ({
 			)}
 		>
 			{!active && (
-				<li>
-					<strong className='text-[12px] text-gray-500'>미사용 항목</strong>
-				</li>
+				<strong className='text-[12px] text-gray-500'>미사용 항목</strong>
 			)}
 			{children}
-		</ul>
+		</div>
 	);
 };
 

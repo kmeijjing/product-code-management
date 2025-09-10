@@ -1,17 +1,25 @@
 import { CODE_FIELD_LABELS } from '@/constants/codePatterns';
 import type { CodePattern } from '@/types/codePattern';
 import SectionHeaderCard from '@/components/SectionHeaderCard';
+import { MAX_CODE_LENGTH } from '@/constants/codeManagement';
 
 const CodePreview = ({
 	sampleCode,
+	activeCodeDigit,
 }: {
 	sampleCode: { product: CodePattern[]; option: CodePattern[] };
+	activeCodeDigit: number;
 }) => {
 	return (
 		<SectionHeaderCard
 			title='코드 미리보기'
 			subTitle='미리보기는 등록된 코드의 최상단 값으로 노출됩니다.'
 		>
+			<SectionHeaderCard.HeaderRight className='text-[12px] text-gray-500'>
+				<span>{activeCodeDigit}자리</span>
+				<span> / </span>
+				<strong>{MAX_CODE_LENGTH} 자리</strong>
+			</SectionHeaderCard.HeaderRight>
 			<SectionHeaderCard.Body>
 				<div className='flex items-center justify-center px-[24px] py-[16px]'>
 					<div className='flex w-fit flex-nowrap items-center gap-x-[8px]'>

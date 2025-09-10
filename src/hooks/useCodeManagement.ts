@@ -21,10 +21,31 @@ export const useCodeManagement = () => {
 	);
 
 	const sampleCodePattern = useMemo(() => {
+		const productCode = activeProductCode.map((code) => {
+			if (code.field === 'sequence') {
+				return { ...code, sampleCode: '0'.repeat(code.length) };
+			}
+			const sampleCode = CODE_DATA[code.field]?.[0]?.value || '';
+			return { ...code, sampleCode: sampleCode || '' };
+		});
+
+		const optionCode = activeOptionCode.map((code) => {
+			if (code.field === 'sequence') {
+				return { ...code, sampleCode: '0'.repeat(code.length) };
+			}
+			const sampleCode = CODE_DATA[code.field]?.[0]?.value || '';
+			return { ...code, sampleCode: sampleCode || '' };
+		});
 		return {
-			product: activeProductCode,
-			option: activeOptionCode,
+			product: productCode,
+			option: optionCode,
 		};
+	}, [activeProductCode, activeOptionCode]);
+
+	const activeCodeDigit = useMemo(() => {
+		const codes = [...activeProductCode, ...activeOptionCode];
+
+		return codes.reduce((acc, code) => acc + code.length, 0);
 	}, [activeProductCode, activeOptionCode]);
 
 	const fetchCodePatterns = () => {
@@ -68,5 +89,6 @@ export const useCodeManagement = () => {
 	return {
 		fetchCodePatterns,
 		sampleCodePattern,
+		activeCodeDigit,
 	};
 };
