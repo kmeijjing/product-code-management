@@ -49,7 +49,7 @@ const SectionHeaderCard = ({
 	return (
 		<div
 			className={clsx(
-				'overflow-hidden rounded-[12px] border border-gray-300 bg-white',
+				'w-full overflow-hidden rounded-[12px] border border-gray-300 bg-white',
 				className
 			)}
 		>
