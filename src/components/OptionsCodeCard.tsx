@@ -31,13 +31,13 @@ const OptionsCodeCard = () => {
 		if (activeOptionCode.length > 0) {
 			setActive(activeOptionCode);
 		}
-	}, [activeOptionCode, setActive]);
+	}, [activeOptionCode]);
 
 	useEffect(() => {
 		if (inactiveOptionCode.length > 0) {
 			setInactive(inactiveOptionCode);
 		}
-	}, [inactiveOptionCode, setInactive]);
+	}, [inactiveOptionCode]);
 
 	useEffect(() => {
 		update('activeOptionCode', activeItems);

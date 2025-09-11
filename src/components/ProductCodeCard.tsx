@@ -37,13 +37,13 @@ const ProductCodeCard = () => {
 		if (activeProductCode.length > 0) {
 			setActive(activeProductCode);
 		}
-	}, [activeProductCode, setActive]);
+	}, [activeProductCode]);
 
 	useEffect(() => {
 		if (inactiveProductCode.length > 0) {
 			setInactive(inactiveProductCode);
 		}
-	}, [inactiveProductCode, setInactive]);
+	}, [inactiveProductCode]);
 
 	useEffect(() => {
 		update('activeProductCode', activeItems);
