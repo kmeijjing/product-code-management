@@ -15,10 +15,10 @@ export const DraggableCodeItemList = ({
 		<ul
 			ref={ref}
 			className={clsx(
-				`flex h-[200px] flex-col gap-y-[8px] overflow-y-auto px-[20px] py-[16px] ${className}`,
+				`flex flex-col gap-y-[8px] overflow-y-auto px-[20px] py-[16px] ${className}`,
 				{
-					'bg-gray-50': active,
-					'bg-white': !active,
+					'h-[200px] bg-gray-50': active,
+					'h-[180px] bg-white': !active,
 				}
 			)}
 		>
