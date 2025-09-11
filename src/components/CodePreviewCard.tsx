@@ -3,13 +3,16 @@ import { CODE_FIELD_LABELS } from '@/constants/codePatterns';
 import type { CodePattern } from '@/types/codePattern';
 import SectionHeaderCard from '@/components/SectionHeaderCard';
 import { MAX_CODE_LENGTH } from '@/constants/codeManagement';
+import { IoAlertCircleOutline } from 'react-icons/io5';
 
 const CodePreview = ({
 	sampleCode,
 	activeCodeDigit,
+	exceedingMaxLength,
 }: {
 	sampleCode: { product: CodePattern[]; option: CodePattern[] };
 	activeCodeDigit: number;
+	exceedingMaxLength: boolean;
 }) => {
 	return (
 		<SectionHeaderCard
@@ -17,9 +20,18 @@ const CodePreview = ({
 			subTitle='미리보기는 등록된 코드의 최상단 값으로 노출됩니다.'
 		>
 			<SectionHeaderCard.HeaderRight className='text-[12px] text-gray-500'>
+				{exceedingMaxLength && (
+					<div className='mr-[8px] flex items-center gap-x-[4px] text-red-500'>
+						<IoAlertCircleOutline />
+
+						<span>등록할 수 있는 자릿수를 초과했습니다.</span>
+					</div>
+				)}
 				<span>{activeCodeDigit}자리</span>
 				<span> / </span>
-				<strong>{MAX_CODE_LENGTH} 자리</strong>
+				<strong className={clsx({ 'text-red-500': exceedingMaxLength })}>
+					{MAX_CODE_LENGTH} 자리
+				</strong>
 			</SectionHeaderCard.HeaderRight>
 			<SectionHeaderCard.Body>
 				<div className='flex items-center justify-center px-[24px] py-[16px]'>
@@ -48,6 +60,7 @@ const CodePreview = ({
 														'h-[38px] min-w-[50px] gap-x-[4px] border-b border-gray-300 text-center text-[24px] leading-[38px] tracking-[4px]',
 														{
 															'font-normal text-gray-400': !code.sampleCode,
+															'text-red-500': exceedingMaxLength,
 														}
 													)}
 												>

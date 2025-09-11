@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { CodePattern } from '@/types/codePattern';
 import { CODE_PATTERNS } from '@/constants/codePatterns';
 import { CODE_DATA } from '@/constants/codes';
+import { MAX_CODE_LENGTH } from '@/constants/codeManagement';
 import { useOptionCodeStore } from '@/stores/useOptionCodeStore';
 import { useProductCodeStore } from '@/stores/useProductCodeStore';
 import { groupByKey, sortByKey } from '@/utils';
@@ -44,6 +45,10 @@ export const useCodeManagement = () => {
 		return codes.reduce((acc, code) => acc + code.length, 0);
 	}, [activeProductCode, activeOptionCode]);
 
+	const exceedingMaxLength = useMemo(() => {
+		return activeCodeDigit > MAX_CODE_LENGTH;
+	}, [activeCodeDigit]);
+
 	const fetchCodePatterns = () => {
 		const codePattern = CODE_PATTERNS;
 
@@ -79,5 +84,6 @@ export const useCodeManagement = () => {
 		fetchCodePatterns,
 		sampleCodePattern,
 		activeCodeDigit,
+		exceedingMaxLength,
 	};
 };
