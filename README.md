@@ -43,16 +43,42 @@
 ## 📂 프로젝트 구조
 
 ```
-product-code-management/
-├── src/
-│ ├── components/       # UI 컴포넌트 (모달, 드래그 리스트 등)
-│ ├── stores/           # Zustand 스토어 (상품/옵션 코드 상태 관리)
-│ ├── constants/        # 코드 패턴 및 목데이터
-│ └── app/              # Next.js App Router
-├── public/             # 정적 자산
-├── eslint.config.mjs   # ESLint 설정
-├── tailwind.config.ts  # Tailwind 설정
-└── package.json
+📦src
+┣ 📂app
+┃ ┣ 📜layout.tsx
+┃ ┗ 📜page.tsx
+┣ 📂components
+┃ ┣ 📜CodePatternDetailModal.tsx
+┃ ┣ 📜CodePreviewCard.tsx
+┃ ┣ 📜DraggableCodeItem.tsx
+┃ ┣ 📜DraggableCodeItemList.tsx
+┃ ┣ 📜Modal.tsx
+┃ ┣ 📜ModalCard.tsx
+┃ ┣ 📜OptionsCodeCard.tsx
+┃ ┣ 📜ProductCodeCard.tsx
+┃ ┣ 📜SectionHeaderCard.tsx
+┃ ┗ 📜Tag.tsx
+┣ 📂constants
+┃ ┣ 📜codeManagement.ts
+┃ ┣ 📜codePatterns.ts
+┃ ┗ 📜codes.ts
+┣ 📂contexts
+┃ ┗ 📜ModalProvider.tsx
+┣ 📂hooks
+┃ ┗ 📜useCodeManagement.ts
+┣ 📂stores
+┃ ┣ 📜useModalStore.ts
+┃ ┣ 📜useOptionCodeStore.ts
+┃ ┗ 📜useProductCodeStore.ts
+┣ 📂styles
+┃ ┗ 📜globals.css
+┣ 📂types
+┃ ┣ 📜code.ts
+┃ ┗ 📜codePattern.ts
+┗ 📂utils
+┃ ┣ 📜groupByKey.ts
+┃ ┣ 📜index.ts
+┃ ┗ 📜sortByKey.ts
 ```
 
 ## 🚀 실행 방법
@@ -115,17 +141,47 @@ Showcases frontend architecture with **state management, drag-and-drop interacti
 ## 📂 Project Structure
 
 ```
-product-code-management/
-├── src/
-│   ├── components/    # UI components (Modal, Draggable lists, etc.)
-│   ├── stores/        # Zustand store for product & option codes
-│   ├── constants/     # Code patterns & mock data
-│   └── app/           # Next.js app router
-├── public/            # Static assets
-├── eslint.config.mjs  # ESLint setup
-├── tailwind.config.ts # Tailwind configuration
-└── package.json
+
+📦src
+┣ 📂app
+┃ ┣ 📜layout.tsx
+┃ ┗ 📜page.tsx
+┣ 📂components
+┃ ┣ 📜CodePatternDetailModal.tsx
+┃ ┣ 📜CodePreviewCard.tsx
+┃ ┣ 📜DraggableCodeItem.tsx
+┃ ┣ 📜DraggableCodeItemList.tsx
+┃ ┣ 📜Modal.tsx
+┃ ┣ 📜ModalCard.tsx
+┃ ┣ 📜OptionsCodeCard.tsx
+┃ ┣ 📜ProductCodeCard.tsx
+┃ ┣ 📜SectionHeaderCard.tsx
+┃ ┗ 📜Tag.tsx
+┣ 📂constants
+┃ ┣ 📜codeManagement.ts
+┃ ┣ 📜codePatterns.ts
+┃ ┗ 📜codes.ts
+┣ 📂contexts
+┃ ┗ 📜ModalProvider.tsx
+┣ 📂hooks
+┃ ┗ 📜useCodeManagement.ts
+┣ 📂stores
+┃ ┣ 📜useModalStore.ts
+┃ ┣ 📜useOptionCodeStore.ts
+┃ ┗ 📜useProductCodeStore.ts
+┣ 📂styles
+┃ ┗ 📜globals.css
+┣ 📂types
+┃ ┣ 📜code.ts
+┃ ┗ 📜codePattern.ts
+┗ 📂utils
+┃ ┣ 📜groupByKey.ts
+┃ ┣ 📜index.ts
+┃ ┗ 📜sortByKey.ts
+
 ```
+
+````
 
 ## 🚀 Getting Started
 
@@ -136,7 +192,7 @@ git clone https://github.com/kmeijjing/product-code-management.git
 cd product-code-management
 npm install
 npm run dev
-```
+````
 
 2. Visit http://localhost:3000 to explore.
 
